@@ -1,9 +1,9 @@
 diamantes = int(input())
 if diamantes <= 10:
-  print(Arthur)
+  print('Arthur')
 elif diamantes <= 30:
-  print(Luiz)
+  print('Luiz')
 elif diamantes <= 100:
-  print(Pedro)
+  print('Pedro')
 else:
-  print(Nenhum)
+  print('Nenhum')
