@@ -1,0 +1,8 @@
+x = int(input())
+y = int(input())
+distancia_H = sqrt((34 - x)**2 + (220 - y)**2)
+distancia_K = sqrt((0 - x)**2 + (0 - y)**2)
+distancia_S = sqrt((140 - x)**2 + (456 - y)**2)
+print(distancia_H)
+print(distancia_K)
+print(distancia_S)
