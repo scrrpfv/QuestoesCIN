@@ -1,29 +1,34 @@
 #include <iostream>
 using namespace std;
 
-int main() 
+int main()
 {
     int num_testes;
     cin >> num_testes;
     for (int i=0; i<num_testes; i++)
     {
-        int peso = -1;
         int num_participantes;
 
         cin >> num_participantes;
 
-        int forçapoly;
-        int resistênciapoly;
+        int forcapoly;
+        int resistenciapoly;
 
-        cin >> forçapoly;
-        cin >> resistênciapoly;
+        cin >> forcapoly;
+        cin >> resistenciapoly;
+        int peso = forcapoly;
 
-        for (int i=1; i<num_participantes; i++)
+        for (int j=1; j<num_participantes; j++)
         {   
-            int força;
-            int resistência;
-            
-            cin >> força >> resistência;
+            int forca;
+            int resistencia;
+
+            cin >> forca >> resistencia;
+            if (forca >= forcapoly && resistencia >= resistenciapoly)
+            {
+                peso = -1;
+            }
         }
+        cout << peso << endl;
     }
 }
