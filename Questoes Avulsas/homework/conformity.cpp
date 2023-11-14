@@ -23,12 +23,14 @@ int main(){
             combinations[courses] += 1;
         }
         map<int, int> amounts;
-        for (auto &[key, value] : combinations)
+        for (auto const& x : combinations)
         {
-            amounts[value] += 1;
+            amounts[x.second] += x.second;
         }
-        int max = amounts.end()->second;
-        cout << amounts[amounts.end()->first] << endl;
+        int maxkey = amounts.rbegin()->first;
+        int max = amounts[maxkey];
+        cout << max << endl;
+        cin >> nrows;
     }
     return 0;
 }
