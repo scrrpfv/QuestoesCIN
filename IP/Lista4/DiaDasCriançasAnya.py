@@ -34,7 +34,7 @@ def principal(n_presentes):
             print(f'{presente} já está na lista de presentes da Anya!!')
 
     lista_presentes = exclui_presentes(lista_presentes, presentes_excluidos)
-
+    
     if n_presentes > 0:
         if len(presentes_excluidos) > 0:
             print(f'Infelizmente o Twilight é mão de vaca e os seguintes itens precisaram ser excluídos da lista de presentes ultrassecretos da Anya: {", ".join(presentes_excluidos)}.')
