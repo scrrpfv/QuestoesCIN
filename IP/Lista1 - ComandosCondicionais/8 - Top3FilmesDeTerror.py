@@ -1,0 +1,3 @@
+n1,p1,c1,n2,p2,c2,n3,p3,c3,b,m,r,p,l,s=input(),int(input()),input(),input(),int(input()),input(),input(),int(input()),input(),"boa","media","ruim","pessima"," teve uma crítica péssima","\n"
+p1,p2,p3=(p1*1.25*(c1==b)+p1*(c1==m)+p1*0.75*(c1==r)),(p2*1.25*(c2==b)+p2*(c2==m)+p2*0.75*(c2==r)),(p3*1.25*(c3==b)+p3*(c3==m)+p3*0.75*(c3==r))
+print(f'**** TOP 3 FILMES ****\n{n1*(p2<p1>p3)+n2*(p3<p2>p1)+n3*(p1<p3>p2)} está em 1° lugar\n{n1*((p2>p1>p3)|(p3>p1>p2))+n2*((p1>p2>p3)|(p3>p2>p1))+n3*((p1>p3>p2)|(p2>p3>p1))} está em 2° lugar\n{n1*(p2>p1<p3)+n2*(p3>p2<p1)+n3*(p1>p3<p2)} está em 3° lugar{s*((c1==p)|(c2==p)|(c3==p))}{n1*(c1==p)+n2*(c2==p)+n3*(c3==p)}{l*((c1==p)|(c2==p)|(c3==p))}')
