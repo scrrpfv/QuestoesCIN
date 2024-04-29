@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define int long long int
+
 void swap(int* a, int* b)
 {
     int temp = *a;
@@ -55,7 +57,7 @@ int main()
     }
 
     int m;
-    scanf("%d", &n);
+    scanf("%d", &m);
 
     quicksort(arr, 0, n-1);
 
@@ -65,7 +67,7 @@ int main()
         scanf("%d", &q);
 
         int out = sum - arr[n-q];
-        printf("%d\n", out);
+		printf("%d\n", out);
     }
     return 0;
 }
