@@ -67,6 +67,5 @@ int main()
         int out = sum - arr[n-q];
         printf("%d\n", out);
     }
-
     return 0;
 }
