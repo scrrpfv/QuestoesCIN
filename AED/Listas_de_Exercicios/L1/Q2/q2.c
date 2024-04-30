@@ -32,24 +32,27 @@ void quicksort(int *arr, int l, int r) {
 }
 
 int main() {
-    int cases;
-    scanf("%d", &cases);
-    for (int i=0; i<cases; i++) {
-        int n;
-		scanf("%d", &n);
-		int arr[n];
+    int n, k;
+    scanf("%d %d", &n, &k);
+    int arr[n];
 
-		for (int j=0; j<n; j++) {
-			scanf("%d", &arr[j]);
-		}
-
-        quicksort(arr, 0, n-1);
-
-        for (int j=0; j<n; j++) {
-			printf("%d", arr[j]);
-			if (j < n - 1) { printf(" "); }
-		}
-		printf("\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);    
     }
+
+    quicksort(arr, 0, n-1);
+
+    int c = 0;
+    for (int i = 0; i < n-1; i++) {
+        int j = i + 1;
+        while (arr[j] - arr[i] <= k) {
+            if (arr[j] - arr[i] == k) {
+                c++;
+            }
+            j++;
+        }
+    }
+    printf("%d", c);
+
     return 0;
 }
