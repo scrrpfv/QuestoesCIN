@@ -7,7 +7,7 @@ int binary_search(int *arr, int l, int r, int k) {
             return m;
         }
         else if (k < arr[m]) {
-            return binary_search(arr, l, m-1, k);
+            return binary_search(arr, l, m - 1, k);
         }
         else {
             return binary_search(arr, m + 1, r, k);
