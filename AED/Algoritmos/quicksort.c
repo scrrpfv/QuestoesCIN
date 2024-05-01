@@ -14,7 +14,6 @@ int hoare_partition(int *arr, int l, int r) {
 	do {
 		do { i++; } while (arr[i] < p && i < r);
 		do { j--; } while (arr[j] > p);
-
 		swap(&arr[i], &arr[j]);
 	} while (i < j);
 
