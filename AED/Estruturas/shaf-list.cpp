@@ -70,7 +70,7 @@ class AList : public List<E> {
     void insert(const E& it) {
         Assert(listSize < maxSize, "List capacity exceeded");
         for(int i=listSize; i>curr; i--) // Shift elements up
-        listArray[i] = listArray[i-1]; // to make room
+            listArray[i] = listArray[i-1]; // to make room
         listArray[curr] = it;
         listSize++; // Increment list size
         }
