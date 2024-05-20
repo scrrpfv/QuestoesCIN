@@ -119,7 +119,6 @@ class AList : public List<E> {
 template <typename E> class LList: public List<E> {
     private:
     Link<E>* head; // Pointer to list header
-    
     Link<E>* tail; // Pointer to last element
     Link<E>* curr; // Access to current element
     int cnt; // Size of list

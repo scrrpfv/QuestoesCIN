@@ -1,6 +1,6 @@
-#ifndef _ALIST_H
-#define _ALIST_H
-#ifdef _ALIST_C
+#ifndef _LLIST_H
+#define _LLIST_H
+#ifdef _LLIST_C
 
 typedef struct E E;
 
