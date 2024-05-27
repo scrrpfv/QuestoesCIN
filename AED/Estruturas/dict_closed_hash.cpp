@@ -25,6 +25,12 @@ Dict* create_dict(int size, int (*h)(int)) {
     return d;
 }
 
+E* find(Dict *d, int k) {
+    return e;
+}
+
 void insert(Dict *d, int k, E e) {
-    
+    if(d->n < d->n && find(d, k) == NULL) {
+
+    }
 }
