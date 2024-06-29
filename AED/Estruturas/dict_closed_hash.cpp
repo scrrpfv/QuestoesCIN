@@ -26,6 +26,7 @@ Dict* create_dict(int size, int (*h)(int)) {
 }
 
 E* find(Dict *d, int k) {
+    E* e;
     return e;
 }
 
