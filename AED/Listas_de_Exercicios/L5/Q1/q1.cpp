@@ -7,6 +7,11 @@ typedef struct graph {
     vector<int> mark;
 } graph;
 
+typedef struct contestant {
+    string name;
+    int rank;
+} contestant;
+
 graph* create_graph(int size) {
     graph* g = new graph;
     g->adj.resize(size);
@@ -30,11 +35,26 @@ void BFS(graph* g, int start) {
     }
 }
 
-void DFS(graph* g, int v) {
-    g->mark[v] = 1;
-    for (auto w : g->adj[v]) {
-        if (!g->mark[w]) {
-            DFS(g, w);
+int main() {
+    int t;
+    cin >> t;
+
+    for (int i = 0; i < t; i++) {
+        int n;
+        cin >> n;
+        vector<contestant> list;
+
+        for (int j = 0; j < n; j++) {
+            contestant group[3];
+            cin >> group[0].name >> group[1].name >> group[2].name;
+
+            for (contestant p : group) {
+                if (find(list.begin(), list.end(), p) == list.end()) {
+                    list.push_back(p);
+                }
+                
+            }
         }
     }
+    return 0;
 }
