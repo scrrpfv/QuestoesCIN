@@ -12,10 +12,8 @@ typedef struct contestant {
     int rank;
 } contestant;
 
-graph* create_graph(int size) {
+graph* create_graph() {
     graph* g = new graph;
-    g->adj.resize(size);
-    g->mark.resize(size);
     return g;
 }
 
@@ -43,16 +41,18 @@ int main() {
         int n;
         cin >> n;
         vector<contestant> list;
+        graph* g = create_graph();
 
         for (int j = 0; j < n; j++) {
-            contestant group[3];
-            cin >> group[0].name >> group[1].name >> group[2].name;
+            string group[3];
+            cin >> group[0] >> group[1] >> group[2];
 
-            for (contestant p : group) {
+            for (string p : group) {
                 if (find(list.begin(), list.end(), p) == list.end()) {
-                    list.push_back(p);
+                    contestant newc;
+                    newc.name = p;
+                    list.push_back(newc);
                 }
-                
             }
         }
     }
