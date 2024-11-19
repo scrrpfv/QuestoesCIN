@@ -1,0 +1,49 @@
+i = 2
+ehPrimo = True
+while i < numero:
+    if numero % i == 0:
+        ehPrimo = False
+    i += 1
+if ehPrimo and numero != 1:
+    print(numero, "eh primo")
+else:
+    print(numero, "não eh primo")
+
+# a) caso n = 5:
+# 14
+i = 2 # 1
+ehPrimo = True # 1
+while i < numero: # 4
+    if numero % i == 0: # 3
+        ehPrimo = False # 0
+    i += 1 # 3
+if ehPrimo and numero != 1: # 1
+    print(numero, "eh primo") # 1
+else: # 0
+    print(numero, "nao eh primo") # 0
+
+# b) caso n = 10:
+# 32
+i = 2 # 1
+ehPrimo = True # 1
+while i < numero: # 9
+    if numero % i == 0: # 8
+        ehPrimo = False # 2
+    i += 1 # 8
+if ehPrimo and numero != 1: # 1
+    print(numero, "eh primo") # 0
+else: # 1
+    print(numero, "nao eh primo") # 1
+
+# c) caso n = 15:
+# 47
+i = 2 # 1
+ehPrimo = True # 1
+while i < numero: # 14
+    if numero % i == 0: # 13
+        ehPrimo = False # 2
+    i += 1 # 13
+if ehPrimo and numero != 1: # 1
+    print(numero, "eh primo") # 0
+else: # 1
+    print(numero, "nao eh primo") # 1

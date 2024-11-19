@@ -1,0 +1,8 @@
+def preProcessaTexto(texto):
+    textoFinal = ""
+    for letra in texto:
+        if letra >= "A" and letra <= "Z":
+            textoFinal += str.lower(letra)
+        if letra >= "a" and letra <= "z":
+            textoFinal += letra
+    return textoFinal
