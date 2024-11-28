@@ -1,6 +1,3 @@
-#define _LLIST_C
-#include "lnk_list.h"
-
 typedef struct E {
     int value;
 } E;

@@ -1,6 +1,3 @@
-#define _ALIST_C
-#include "arr_list.h"
-
 typedef struct E {
     int value;
 } E;
