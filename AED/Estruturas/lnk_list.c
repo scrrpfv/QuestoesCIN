@@ -34,7 +34,3 @@ List create_list() {
     l.size = 0;
     return l;
 }
-
-void clear(List* l) {
-    
-}
