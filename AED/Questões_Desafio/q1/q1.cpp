@@ -25,7 +25,7 @@ void prev(List* l) {
     l->curr = l->curr->prev;
 }
 
-void remove(List* l, Link* x) {
+Link* remove(List* l, Link* x) {
     if (x->prev != NULL) {
         x->prev->next = x->next;
         x->next->next->prev = x->next;
@@ -37,6 +37,7 @@ void remove(List* l, Link* x) {
         x->next->prev = x->next;
     }
     l->size--;
+    return x;
 }
 
 List* create_list() {
@@ -102,6 +103,40 @@ Link* pop(Stack* s) {
     Link* p = s->top;
     s->top = s->top->prev;
     s->size--;
+    return p;
+}
+
+void print(List* l) {
+    l->curr = l->tail;
+    for (int i = 0; i < l->size; i++) {
+        if (l->curr->is_op) {
+            cout << l->curr->op;
+        }
+        else {
+            cout << l->curr->value;
+        }
+        prev(l);
+    }
+}
+
+int operate(int a, int b, char op) {
+    switch (op) {
+        case '+':
+            return a + b;
+        case '-':
+            return a - b;
+        case '*':
+            return a * b;
+        case '/':
+            return a / b;
+        case '^':
+            return a ^ b;
+    }
+    return 0;
+}
+
+int is_op(char c) {
+    return c == '+' | c == '-' | c == '/' | c == '*' | c == '^';
 }
 
 int main() {
@@ -113,13 +148,14 @@ int main() {
 
     for (char& c : str) {
         if (c != '(') {
-            if (c == '+' | c == '-' | c == '/' | c == '*' | c == '^') {
+            if (is_op(c)) {
                 Link* x = create_link(1, c, 0);
                 push(s, x);
             }
             else if (c == ')') {
                 l->curr = l->head;
-                insert_link(l, pop(s));
+                Link* x = pop(s);
+                insert_link(l, x);
             }
             else {
                 l->curr = l->head;
@@ -128,5 +164,23 @@ int main() {
                 insert_link(l, x);
             }
         }
+    }
+
+    l->curr = l->head;
+    Link* x = pop(s);
+    insert_link(l, x);
+
+    l->curr = l->tail;
+    for (int i = 0; i < l->size; i++) {
+        if (l->curr->is_op) {
+            char op = remove(l, l->curr)->op;
+            int a = remove(l, l->curr)->value;
+            int b = remove(l, l->curr)->value;
+            int c = operate(b, a, op);
+            Link* d = create_link(0, ' ', c);
+            insert_link(l, d);
+        }
+        prev(l);
+        print(l);
     }
 }
