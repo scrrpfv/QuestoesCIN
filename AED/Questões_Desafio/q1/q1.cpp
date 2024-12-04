@@ -22,19 +22,29 @@ void next(List* l) {
 }
 
 void prev(List* l) {
-    l->curr = l->curr->prev;
+    if (l->curr != NULL and l->curr->prev != NULL) {
+        l->curr = l->curr->prev;
+    }
 }
 
 Link* remove(List* l, Link* x) {
     if (x->prev != NULL) {
         x->prev->next = x->next;
-        x->next->next->prev = x->next;
     }
     else {
-        l->tail = x->next;
+        l->head = x->next;
     }
     if (x->next != NULL) {
-        x->next->prev = x->next;
+        x->next->prev = x->prev;
+    }
+    else {
+        l->tail = x->prev;
+    }
+    if (x->next != NULL) {
+        l->curr = x->next;
+    }
+    else {
+        l->curr = x->prev;
     }
     l->size--;
     return x;
@@ -107,6 +117,7 @@ Link* pop(Stack* s) {
 }
 
 void print(List* l) {
+    Link* temp = l->curr;
     l->curr = l->tail;
     for (int i = 0; i < l->size; i++) {
         if (l->curr->is_op) {
@@ -117,6 +128,8 @@ void print(List* l) {
         }
         prev(l);
     }
+    l->curr = temp;
+    cout << endl;
 }
 
 int operate(int a, int b, char op) {
@@ -170,9 +183,11 @@ int main() {
     Link* x = pop(s);
     insert_link(l, x);
 
+    print(l);
+
     l->curr = l->tail;
-    for (int i = 0; i < l->size; i++) {
-        if (l->curr->is_op) {
+    while (l->tail != l->head) {
+        if (l->curr != NULL and l->curr->is_op) {
             char op = remove(l, l->curr)->op;
             int a = remove(l, l->curr)->value;
             int b = remove(l, l->curr)->value;
@@ -180,7 +195,13 @@ int main() {
             Link* d = create_link(0, ' ', c);
             insert_link(l, d);
         }
-        prev(l);
+        if (l->curr->prev != NULL) {
+            prev(l);
+        }
+        else {
+            l->curr = l->tail;
+        }
         print(l);
     }
+    cout << l->tail->value;
 }
