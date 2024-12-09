@@ -106,7 +106,7 @@ int remove_tail(List* l) {
 }
 
 int remove_head(List* l) {
-    int r = l->tail->value;
+    int r = l->head->value;
     if (l->tail == l->head) {
         l->tail = l->head = l->curr = NULL;
     }
@@ -114,7 +114,7 @@ int remove_head(List* l) {
         l->head = l->head->prev;
         l->head->next = NULL;
     }
-    free(l->tail);
+    free(l->head);
     l->size--;
     return r;
 }
