@@ -157,14 +157,37 @@ lNode* access(List* l, int pos) {
     return x;
 }
 
+void remove(List* l, lNode* n) {
+    if (l->size == 1) {
+        l->head = l->tail = NULL;
+    }
+    else {
+        if (n->next != NULL) {
+            n->next->prev = n->prev;
+        }
+        else {
+            l->tail = n->prev;
+        }
+        if (n->prev != NULL) {
+            n->prev->next = n->next;
+        }
+        else {
+            l->head = n->next;
+        }
+    }
+    delete n;
+    l->size--;
+}
+
 void solve(int p) {
     string line;
     int S, C;
     List* l = create_list();
-    cin >> line; // recebendo da forma errada
+    cin >> line;
     while (line != "END") {
         istringstream is(line);
-        is >> S >> C;
+        is >> S;
+        cin >> C;
 
         if (S == 0) {
             add_head(l, create_lNode());
@@ -172,15 +195,25 @@ void solve(int p) {
         else if (S > l->size) {
             add_tail(l, create_lNode());
         }
-        Stack* stack = access(l, S)->stack;
-        push(stack, C);
+        lNode* n = access(l, S-1);
+        if (n->stack->size > 0 && n->stack->top->value == C) {
+            pop(n->stack);
+            if (n->stack->size == 0) {
+                remove(l, n);
+            }
+        }
+        else {
+            push(n->stack, C);
+        }
+        cin >> line;
     }
     cout << "caso " << p << ":";
-    lNode* n = l->head;
-    while (n != NULL) {
-        cout << " " << n->stack->top;
-        n = n->next;
+    lNode* m = l->head;
+    while (m != NULL) {
+        cout << " " << m->stack->top->value;
+        m = m->next;
     }
+    cout << endl;
 }
 
 int main(){
