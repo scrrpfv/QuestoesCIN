@@ -178,3 +178,7 @@ void posorder(node* rt) {
         //do something
     }
 }
+
+int main() {
+    return 0;
+}
