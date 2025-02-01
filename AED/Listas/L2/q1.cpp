@@ -4,14 +4,9 @@ using namespace std;
 
 #define endl "\n"
 
-typedef struct E {
+typedef struct node {
     int ID;
     int WEI;
-    int RNK;
-} E;
-
-typedef struct node {
-    E* e;
     node* right;
     node* left;
     int height;
@@ -22,25 +17,26 @@ typedef struct AVL {
     int size;
 } AVL;
 
-node* create_node(E* e) {
+node* create_node(int ID, int WEI) {
     node* n = new node;
-    n->e = e;
-    n->left = n->right = nullptr;
+    n->ID = ID;
+    n->WEI = WEI;
+    n->left = n->right = NULL;
     return n;
 }
 
 AVL* create_AVL() {
     AVL* avl = new AVL;
-    avl->root = nullptr;
+    avl->root = NULL;
     avl->size = 0;
     return avl;
 }
 
 node* findhelp(node* rt, int ID) {
-    if (rt == nullptr) { return nullptr; }
-    if (rt->e->ID > ID) {
+    if (rt == NULL) { return NULL; }
+    if (rt->ID > ID) {
         return findhelp(rt->left, ID);
-    } else if (rt->e->ID < ID) {
+    } else if (rt->ID < ID) {
         return findhelp(rt->right, ID);
     } else {
         return rt;
@@ -52,14 +48,14 @@ node* find(AVL* avl, int ID) {
 }
 
 int h(node* rt) {
-    if (rt == nullptr) {
+    if (rt == NULL) {
         return -1;
     }
     return rt->height;
 }
 
 int getBalance(node* rt) {
-    if (rt == nullptr) {
+    if (rt == NULL) {
         return 0;
     }
     return h(rt->left) - h(rt->right);
@@ -87,31 +83,31 @@ node* leftRotate(node* rt) {
     return r;
 }
 
-node* inserthelp(node* rt, E* e) {
-    if (rt == nullptr) { return create_node(e); }
-    if (rt->e->ID > e->ID) {
-        rt->left = inserthelp(rt->left, e);
+node* inserthelp(node* rt, int ID, int WEI) {
+    if (rt == NULL) { return create_node(ID, WEI); }
+    if (rt->ID > ID) {
+        rt->left = inserthelp(rt->left, ID, WEI);
     } else {
-        rt->right = inserthelp(rt->right, e);
+        rt->right = inserthelp(rt->right, ID, WEI);
     }
     rt->height = 1 + max(h(rt->left), h(rt->right));
     int balance = getBalance(rt);
 
     // Left-Left
-    if (balance > 1 && e->ID < rt->left->e->ID) {
+    if (balance > 1 && ID < rt->left->ID) {
         return rightRotate(rt);
     }
     // Right-Right
-    if (balance < -1 && e->ID >= rt->right->e->ID) {
+    if (balance < -1 && ID >= rt->right->ID) {
         return leftRotate(rt);
     }
     // Left-Right
-    if (balance > 1 && e->ID >= rt->left->e->ID) {
+    if (balance > 1 && ID >= rt->left->ID) {
         rt->left = leftRotate(rt->left);
         return rightRotate(rt);
     // Right-Left
     }
-    if (balance < -1 && e->ID < rt->right->e->ID) {
+    if (balance < -1 && ID < rt->right->ID) {
         rt->right = rightRotate(rt->right);
         return leftRotate(rt);
     }
@@ -119,9 +115,24 @@ node* inserthelp(node* rt, E* e) {
     return rt;
 }
 
-void insert(AVL* avl, E* e) {
-    avl->root = inserthelp(avl->root, e);
+void insert(AVL* avl, int ID, int WEI) {
+    avl->root = inserthelp(avl->root, ID, WEI);
     avl->size++;
+}
+
+int getdepth(AVL* avl, int ID) {
+    int d = 0;
+    node* rt = avl->root;
+    while (rt != NULL) {
+        if (rt->ID > ID) {
+            rt = rt->left;
+        } else if (rt->ID < ID){
+            rt = rt->right;
+        } else {
+            return d;
+        }
+        d++;
+    }
 }
 
 int main(){
@@ -134,31 +145,28 @@ int main(){
 
     string consulta;
     cin >> consulta;
-    int ID, w;
+    int ID, WEI;
     while (consulta != "END") {
         cin >> ID;
         if (consulta == "ADD") {
-            cin >> w;
-            total += w;
+            cin >> WEI;
+            total += WEI;
 
             cout << total << endl;
 
             node* nd = find(avl, ID);
             if (nd != NULL) {
-                nd->e->WEI += w;
+                nd->WEI += WEI;
             }
             else {
-                E* e = new E;
-                e->ID = ID;
-                e->WEI = w;
-                insert(avl, e);
+                insert(avl, ID, WEI);
             }
         }
         else if (consulta == "WEI") {
             node* nd = find(avl, ID);
             if (nd != NULL) {
-                int depth = (avl->root->height - 1) - nd->height;
-                cout << nd->e->WEI << " " << depth << endl;
+                int depth = getdepth(avl, ID);
+                cout << nd->WEI << " " << depth << endl;
             }
             else {
                 cout << "0 -1" << endl;
