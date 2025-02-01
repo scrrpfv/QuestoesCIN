@@ -14,7 +14,6 @@ typedef struct node {
 
 typedef struct AVL {
     node* root;
-    int size;
 } AVL;
 
 node* create_node(int ID, int WEI) {
@@ -28,7 +27,6 @@ node* create_node(int ID, int WEI) {
 AVL* create_AVL() {
     AVL* avl = new AVL;
     avl->root = NULL;
-    avl->size = 0;
     return avl;
 }
 
@@ -117,7 +115,6 @@ node* inserthelp(node* rt, int ID, int WEI) {
 
 void insert(AVL* avl, int ID, int WEI) {
     avl->root = inserthelp(avl->root, ID, WEI);
-    avl->size++;
 }
 
 int getdepth(AVL* avl, int ID) {
@@ -128,11 +125,28 @@ int getdepth(AVL* avl, int ID) {
             rt = rt->left;
         } else if (rt->ID < ID){
             rt = rt->right;
-        } else {
-            return d;
-        }
+        } else return d;
         d++;
     }
+    return -1;
+}
+
+int getrnk_help(AVL* avl, node* rt, int ID) {
+    int x = 0;
+    if (rt != NULL) {
+        if (rt->ID < ID) {
+            x = rt->WEI;
+            x += getrnk_help(avl, rt->right, ID);
+        }
+        x += getrnk_help(avl, rt->left, ID);
+    }
+    return x;
+}
+
+int getrnk(AVL* avl, int ID) {
+    int rnk = 0;
+    rnk += getrnk_help(avl, avl->root, ID);
+    return rnk;
 }
 
 int main(){
@@ -173,7 +187,9 @@ int main(){
             }
         }
         else if (consulta == "RNK") {
-            
+            node* rt = find(avl, ID);
+            int RNK = getrnk(avl, ID);
+            cout << RNK << endl;
         }
         cin >> consulta;
     }
