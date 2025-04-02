@@ -1,14 +1,14 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 struct heap {
-    int* arr;
+    vector<pair<int,int>> arr;
     int max_size;
     int size;
 
-    void swap(int &a, int &b) {
-        int temp = a;
+    void swap(pair<int,int>& a, pair<int,int>& b) {
+        pair<int,int> temp = a;
         a = b;
         b = temp;
     }
@@ -17,12 +17,12 @@ struct heap {
         int l = 2 * i + 1;
         int r = 2 * i + 2;
         int maior;
-        if (l < size && arr[l] > arr[i]) {
+        if (l < size && arr[l].first > arr[i].first) {
             maior = l;
         } else {
             maior = i;
         }
-        if (r < size && arr[r] > arr[maior]) {
+        if (r < size && arr[r].first > arr[maior].first) {
             maior = r;
         }
         if (maior != i) {
@@ -37,8 +37,8 @@ struct heap {
         }
     }
 
-    void insert_heap(int v) {
-        arr[size] = v;
+    void insert_heap(int v, int id) {
+        arr[size] = make_pair(v, id);
         size++;
         int i = size;
         while (i > 0 && arr[i - 1] > arr[i / 2 - 1]) {
@@ -47,8 +47,8 @@ struct heap {
         }
     }
 
-    int remove_heap() {
-        int removed = arr[0];
+    pair<int, int> remove_heap() {
+        pair<int, int> removed = arr[0];
         arr[0] = arr[size - 1];
         size--;
         heapify(0);
@@ -57,17 +57,19 @@ struct heap {
 };
 
 int main() {
-    heap h;
-    int arr[10] = {10, 4, 8, 7, 2, 1, 30, 25, 19, 17};
-    h.arr = arr;
-    h.max_size = 10;
-    h.size = 10;
-    
-    h.build_heap();
-    
-    cout << "heap: ";
-    for (int i = 0; i < h.size; i++) {
-        cout << h.arr[i] << " ";
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int N, K, V, S[N], B[N], C[N], T[N];
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        cin >> S[i] >> B[i] >> C[i];
     }
-    cout << "\n";
+
+    cin >> V;
+    for (int i = 0; i < V; i++) {
+        cin >> K;
+        
+    }
+    return 0;
 }
